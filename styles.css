@@ -1,0 +1,178 @@
+:root {
+    --en-color : #E7D7CB;
+    --en-tab: #E7E6CB;
+    --background-color: #6862DB;
+    --shadow-color: ;
+    --heart-color: #B1335D;
+    --primary: #E7E6CB;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--background-color);
+}
+.container {
+    height: 100vh;
+    display: grid;
+    place-items: center;
+}
+.container > .en-wrapper {
+    background: var(--en-color);
+    box-shadow: 0 0 40px var(--shadow-color);
+}
+.container > .en-wrapper > .envelope {
+    position: relative;
+    width: 300px;
+    height: 230px;
+}
+.container > .en-wrapper > .envelope::before {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    border-top: 130px solid var(--en-tab);
+    border-right: 150px solid transparent;
+    border-left: 150px solid transparent;
+    top: 0;
+    transform-origin: top;
+    transition: all 0.5s ease-in-out 0.7s;
+
+}
+
+.container > .en-wrapper > .envelope::after {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    border-top: 130px solid transparent;
+    border-left: 150px solid var(--en-color);
+    border-right: 150px solid var(--en-color);
+    border-bottom: 100px solid var(--en-color);
+    bottom: 0;
+}
+.letter {
+    position: absolute;
+    right: 20%;
+    bottom: 0;
+    width: 54%;
+    height: 80%;
+    background: var(--primary);
+    transition: all 1s ease-in-out;
+    padding: 20px 10px;
+    box-shadow: 0 0 10px var(--shadow-color);
+}
+
+.letter > .text{
+    font-size: 10px;
+    color: var(--txt-color);
+    text-align: left;
+}
+
+.heart {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 15px;
+    height: 15px;
+    background: var(--heart-color);
+    z-index: 4;
+    transform: translate(-50%, -20%) rotate(45deg);
+    transition: transform 0.5s ease-in-out 1s;
+    box-shadow: 0 0 10px var(--shadow-color);
+    cursor: pointer;
+}
+.heart::before,
+.heart::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: var(--heart-color);
+    border-radius: 50%;
+}
+.heart::before {
+    top: -7.5px;
+}
+.heart::after{
+    right: 7.5px;
+}
+.flap > .envelope::before {
+    z-index: 0;
+    transform: rotate(180deg);
+}
+.flap > .envelope .letter{
+    bottom: 100px;
+    transform: scale(1.5);
+    transition-delay: 1s;
+    z-index: 3;
+}
+.flap > .heart{
+    transform: rotate(90deg);
+    transition-delay: 0.4s;
+}
+.wheel-of-fortune {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border: 5px solid #000;
+    border-radius: 50%;
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    transform: rotate(0deg);
+    transition: transform 4s cubic-bezier(0.25, 0.1, 0.25, 1);
+    overflow: hidden;
+}
+
+.wheel-of-fortune li {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(50% 50%, 100% 0, 100% 100%);
+    transform-origin: 50% 50%;
+    background: #f1c40f;
+}
+
+.wheel-of-fortune li span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transform: rotate(-18deg); /* Adjust rotation for text */
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    overflow: visible;
+}
+
+.wheel-of-fortune li:nth-child(1) { transform: rotate(0deg); background-color: #f1c40f; }
+.wheel-of-fortune li:nth-child(2) { transform: rotate(36deg); background-color: #e74c3c; }
+.wheel-of-fortune li:nth-child(3) { transform: rotate(72deg); background-color: #3498db; }
+.wheel-of-fortune li:nth-child(4) { transform: rotate(108deg); background-color: #9b59b6; }
+.wheel-of-fortune li:nth-child(5) { transform: rotate(144deg); background-color: #2ecc71; }
+.wheel-of-fortune li:nth-child(6) { transform: rotate(180deg); background-color: #1abc9c; }
+.wheel-of-fortune li:nth-child(7) { transform: rotate(216deg); background-color: #f39c12; }
+.wheel-of-fortune li:nth-child(8) { transform: rotate(252deg); background-color: #d35400; }
+.wheel-of-fortune li:nth-child(9) { transform: rotate(288deg); background-color: #2c3e50; }
+.wheel-of-fortune li:nth-child(10) { transform: rotate(324deg); background-color: #7f8c8d; }
+
+#spin-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#result {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 20px;
+}

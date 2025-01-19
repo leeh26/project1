@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>helen+ollie</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="en-wrapper flap">
+            <div class="envelope">
+                <div class="letter">
+                    <div class="text">
+                        <strong>Ollie!</strong>
+                        <p>Happy 3rd anniversary. It has been 3 years with the best boyfriend I could have every asked for. You are my best friend, and I feel so lucky to have found you. I am looking forward to making a lifetime of memories with you.</p>
+                        <p>P.S. I hope you like the photocards</p>
+                        <p>Love, Helen</p>
+                    </div>
+                </div>
+            </div>
+            <div class="heart">
+
+            </div>
+        </div>
+    </div>
+    <ul class="wheel-of-fortune">
+        <li>dinner</li>
+        <li>coffee</li>
+        <li>bubble tea</li>
+        <li>cook</li>
+        <li>movie at home</li>
+        <li>cinema</li>
+        <li>bake</li>
+        <li>walk</li>
+        <li>museum</li>
+        <li>mooch</li>
+    </ul>
+    <button id="spin-button">Spin</button>
+    <div id="result"></div>
+    <script>
+        const envelope = document.querySelector('.en-wrapper');
+        envelope.addEventListener('click', ()=> {
+            envelope.classList.toggle('flap');
+        });
+        const wheel = document.querySelector('.wheel-of-fortune');
+        const button = document.getElementById('spin-button');
+        const resultDiv = document.getElementById('result');
+        let currentRotation = 0;
+
+        button.addEventListener('click', () => {
+            // Calculate a random rotation between 3 and 5 full spins plus an offset
+            const spin = Math.floor(Math.random() * 360) + 1080; // 1080 = 3 full spins
+            currentRotation += spin;
+
+            // Apply rotation
+            wheel.style.transform = `rotate(${currentRotation}deg)`;
+
+            // Determine the selected item
+            setTimeout(() => {
+                const normalizedRotation = currentRotation % 360;
+                const sectorAngle = 36; // 360 / 10 items
+                const index = Math.floor((360 - normalizedRotation + sectorAngle / 2) % 360 / sectorAngle);
+                const items = Array.from(wheel.children);
+                resultDiv.textContent = `Result: ${items[index].textContent}`;
+            }, 4000); // Wait for spin animation to complete
+        });
+    </script>
+</body>
+
+</html>
